@@ -1,0 +1,22 @@
+<mat-card class="card mt-3" *ngIf="nextViewing">
+  <mat-card-header>
+    <mat-card-title>NEXT VIEWING</mat-card-title>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://images.traum-ferienwohnungen.de/109433/2202626/46/holiday-house-glowe-aussenaufnahme-2.jpg"
+    alt="Photo of a house"
+  />
+  <mat-card-content *ngIf="nextViewing">
+    <p>
+      <b>{{ nextViewing.property.name }}</b>
+    </p>
+    <p class="text-muted">
+      {{ nextViewing.property.address.street }}
+      {{ nextViewing.property.address.houseNumber }},
+      {{ nextViewing.property.address.zipCode }}
+      {{ nextViewing.property.address.city }}
+    </p>
+    <p>{{ nextViewing.date | date: "MMMM d, y h:mm a" }}</p>
+  </mat-card-content>
+</mat-card>

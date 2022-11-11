@@ -1,0 +1,56 @@
+<div class="row" *ngIf="modalData">
+    <div class="col-8"><span><b>  {{modalData.date | date: 'MMMM d, y h:mm a'}}</b></span></div>
+    <div class="col-4">
+        <div class="btn-group">
+            <div
+            *ngIf="this.index != 0"
+              (click)="onPreviews()"
+              class="mr btn btn-light ">
+            
+             < 
+            </div>
+            <div 
+            *ngIf="this.index+1 != appointments.length"
+            (click)="onNext()"
+              class=" btn btn-light"
+             >
+             >
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="container mt-3" *ngIf="modalData">
+    <mat-card>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://image.shutterstock.com/image-photo/house-600w-700094266.jpg"
+                            alt="Photo of haouse">
+                    </div>
+                    <div class="col-8">
+                        <p><b>{{modalData.property.name}}</b></p>
+                        <p class="text-muted">{{modalData.property.address.street}}
+                            {{modalData.property.address.houseNumber}}, {{modalData.property.address.zipCode}}
+                             {{modalData.property.address.city}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://image.shutterstock.com/image-photo/handsome-unshaven-young-darkskinned-male-600w-640011838.jpg"
+                            alt="Photo of agent">
+                    </div>
+                    <div class="col-8">
+                        <p><b>{{modalData.property.user.profile.firstname}} {{modalData.property.user.profile.name}}</b>
+                        </p>
+                        <p class="text-muted">{{modalData.property.user.usertype}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+</div>

@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="row">
+    <app-filters></app-filters>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3">
+      <app-small-month-calendar></app-small-month-calendar>
+      <app-preview *ngIf="appointments" [appointments]="appointments"></app-preview>
+    </div>
+    <div class="col-9">
+      <app-main-calendar *ngIf="appointments" [appointments]="appointments" ></app-main-calendar>
+    </div>
+  </div>
+</div>
