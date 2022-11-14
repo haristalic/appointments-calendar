@@ -3,14 +3,14 @@
     <div class="col-4">
         <div class="btn-group">
             <div
-            *ngIf="this.index != 0"
-              (click)="onPreviews()"
+            *ngIf="index != 0"
+              (click)="onPrevious()"
               class="mr btn btn-light ">
-            
-             < 
+
+             <
             </div>
-            <div 
-            *ngIf="this.index+1 != appointments.length"
+            <div
+            *ngIf="index+1 != appointments.length"
             (click)="onNext()"
               class=" btn btn-light"
              >

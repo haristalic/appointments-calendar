@@ -31,7 +31,7 @@ export class ModalEventComponent implements OnInit {
     this.index = this.index + 1;
     this.modalData = this.appointments[this.index];
   }
-  onPreviews(): void {
+  onPrevious(): void {
     this.index = this.index - 1;
     this.modalData = this.appointments[this.index];
   }

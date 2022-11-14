@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as appointmentsActions from './state/appointments.actions';
-import { filter, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { INode } from 'src/app/shared/models/INode';
 
 @Component({
@@ -21,9 +21,19 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   getDataFromStore() {
     this.store.dispatch(new appointmentsActions.LoadAppointments());
-    this.storeSubscription = this.store
-      .pipe(filter((appointment) => appointment.data.loaded === true))
-      .subscribe((state) => (this.appointments = state.data.appointments));
+    this.storeSubscription = this.store.subscribe(
+      (state) =>
+        state?.data.loaded && this.sortAppointments(state.data.appointments)
+    );
+  }
+  sortAppointments(appointments: INode[]): void {
+    this.appointments = appointments;
+    this.appointments.filter((value, index, appointments) =>
+    index === appointments.findIndex((appointment) => (
+      appointment.date === value.date && appointment.property.id === value.property.id
+    ))
+  )
+
   }
 
   ngOnDestroy(): void {

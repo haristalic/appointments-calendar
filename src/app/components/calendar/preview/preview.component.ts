@@ -25,7 +25,7 @@ export class PreviewComponent implements OnInit {
         this.nextAppointments.push(this.appointments[item]);
       }
     }
-    this.nextViewing = this.nextAppointments.reduce((a: any, b: any) =>
+    this.nextViewing = this.nextAppointments.reduce((a, b) =>
       new Date(a.date).valueOf() - this.today.valueOf() <
       new Date(b.date).valueOf() - this.today.valueOf()
         ? a

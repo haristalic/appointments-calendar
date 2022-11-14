@@ -32,7 +32,7 @@ export class MainCalendarComponent implements OnInit {
       (appointment: INode, index: number) => ({
         start: new Date(appointment.date),
         end: new Date(appointment.date),
-        title: appointment.maxInviteeCount + ' VIEWINGS',
+        title: appointment.attendeeCount + ' VIEWINGS',
         data: index,
       })
     );
