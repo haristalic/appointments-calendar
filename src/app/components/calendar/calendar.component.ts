@@ -27,12 +27,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
     );
   }
   sortAppointments(appointments: INode[]): void {
-    this.appointments = appointments;
-    this.appointments.filter((value, index, appointments) =>
+    this.appointments = appointments.filter((value, index, appointments) =>
     index === appointments.findIndex((appointment) => (
       appointment.date === value.date && appointment.property.id === value.property.id
     ))
-  )
+  );
 
   }
 
