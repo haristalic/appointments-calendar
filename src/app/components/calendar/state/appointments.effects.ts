@@ -8,6 +8,7 @@ import { DataService } from 'src/app/shared/services/data.service';
 
 @Injectable()
 export class AppointmentEffect {
+
   constructor(private actions$: Actions, private dataService: DataService) {}
 
   loadNodes$: Observable<Action> = createEffect(() =>

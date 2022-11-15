@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-
 import { INodes } from 'src/app/shared/models/INodes';
 
 export enum IAppointmentsActionTypes {

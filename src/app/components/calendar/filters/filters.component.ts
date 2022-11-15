@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
+
 export class FiltersComponent  {
 
 

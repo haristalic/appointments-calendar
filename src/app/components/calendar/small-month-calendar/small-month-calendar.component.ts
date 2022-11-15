@@ -9,6 +9,7 @@ import * as moment from 'moment';
 })
 export class SmallMonthCalendarComponent implements OnInit {
   selected: Date;
+
   constructor(private data: DataService) {}
 
   ngOnInit(): void {

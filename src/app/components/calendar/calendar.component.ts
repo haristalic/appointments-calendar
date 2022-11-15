@@ -10,7 +10,7 @@ import { INode } from 'src/app/shared/models/INode';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit, OnDestroy {
-  storeSubscription!: Subscription;
+  storeSubscription: Subscription;
   appointments: INode[];
 
   constructor(private store: Store<any>) {}
@@ -19,20 +19,20 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.getDataFromStore();
   }
 
-  getDataFromStore() {
+  getDataFromStore():void {
     this.store.dispatch(new appointmentsActions.LoadAppointments());
     this.storeSubscription = this.store.subscribe(
       (state) =>
         state?.data.loaded && this.sortAppointments(state.data.appointments)
     );
   }
+
   sortAppointments(appointments: INode[]): void {
     this.appointments = appointments.filter((value, index, appointments) =>
     index === appointments.findIndex((appointment) => (
       appointment.date === value.date && appointment.property.id === value.property.id
     ))
   );
-
   }
 
   ngOnDestroy(): void {

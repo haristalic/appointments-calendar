@@ -1,5 +1,5 @@
+import { IUser } from ".";
 import { IAddress } from "./IAddress";
-import { IProfile } from "./IProfile";
 
 
 export interface IProperty {
@@ -9,10 +9,6 @@ export interface IProperty {
     inviteeCount: number;
     address: IAddress;
     attachements: [];
-    user: {
-        profile: IProfile;
-        usertype: string;
-        typename: string;
-    },
+    user:IUser,
     typename: string;
 }
