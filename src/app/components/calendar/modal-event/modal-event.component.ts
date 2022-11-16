@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { INode } from 'src/app/shared/models/INode';
+import { CustomCalendarEvent } from 'src/app/shared/interfaces/customCalendarEvent';
+import { INode } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-modal-event',
@@ -8,31 +9,38 @@ import { INode } from 'src/app/shared/models/INode';
   styleUrls: ['./modal-event.component.scss'],
 })
 export class ModalEventComponent implements OnInit {
-  modalData: INode;
-  appointments: INode[];
-  index: number;
+  public modalData: INode;
+  public appointments: CustomCalendarEvent[];
+  public index: number;
+  public viewings: INode[];
 
   constructor(
     public dialogRef: MatDialogRef<ModalEventComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { event: number; appointmens: INode[] }
+    public data: { event: CustomCalendarEvent; events: CustomCalendarEvent[] }
   ) {}
 
   ngOnInit(): void {
     this.getDataViewings();
   }
 
-  getDataViewings(): void {
-    this.index = this.data.event;
-    this.modalData = this.data.appointmens[this.index];
-    this.appointments = this.data.appointmens;
-  }
-  onNext(): void {
+  public onNext(): void {
     this.index = this.index + 1;
-    this.modalData = this.appointments[this.index];
+    this.setObjects();
   }
-  onPrevious(): void {
+  public onPrevious(): void {
     this.index = this.index - 1;
-    this.modalData = this.appointments[this.index];
+    this.setObjects();
+  }
+
+  public setObjects(): void {
+    this.modalData = this.appointments[this.index]?.viewings[0];
+    this.viewings = this.data.events[this.index]?.viewings;
+  }
+  private getDataViewings(): void {
+    const event = this.data.event;
+    this.index = event.index;
+    this.appointments = this.data.events;
+    this.setObjects();
   }
 }

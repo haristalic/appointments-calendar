@@ -1,7 +1,4 @@
-import { IUser } from ".";
-import { IAddress } from "./IAddress";
-
-
+import { IUser,IAddress } from "../models";
 export interface IProperty {
     id: string;
     name: string;

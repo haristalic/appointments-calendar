@@ -1,6 +1,4 @@
-import { IContact } from "./IContact";
-
-import { IProperty } from "./IProperty";
+import { IContact,IProperty } from "../models";
 
 export interface INode {
     id: string;

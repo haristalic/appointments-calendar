@@ -1,51 +1,61 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import {
-  CalendarEvent,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import { CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEventComponent } from '../modal-event/modal-event.component';
 import { DataService } from 'src/app/shared/services/data.service';
 import { INode } from 'src/app/shared/models/INode';
-
+import { CustomCalendarEvent } from 'src/app/shared/interfaces/customCalendarEvent';
 @Component({
   selector: 'app-main-calendar',
   templateUrl: './main-calendar.component.html',
   styleUrls: ['./main-calendar.component.scss'],
 })
-
 export class MainCalendarComponent implements OnInit {
-  @Input() appointments: INode[];
+  @Input() public appointments: INode[];
 
-  viewDate: Date;
-  events: CalendarEvent[] = [];
-  view: CalendarView = CalendarView.Week;
-  refresh = new Subject<void>();
+  public viewDate: Date;
+  public events: CustomCalendarEvent[] = [];
+  public view: CalendarView = CalendarView.Week;
+  public refresh = new Subject<void>();
 
   constructor(public dialog: MatDialog, private data: DataService) {}
 
   ngOnInit(): void {
+    this.filterAppointments();
+  }
+  public filterAppointments(): void {
     this.data.currentDate.subscribe((date) => (this.viewDate = new Date(date)));
-    this.events = this.appointments.map(
-      (appointment: INode, index: number) => ({
-        start: new Date(appointment.date),
-        end: new Date(appointment.date),
-        title: 'VIEWINGS',
-        data: index,
-      })
-    );
+
+    // filter appointments to check if there is more than one viewing in same time
+    this.appointments.forEach((item) => {
+      const key = item.date;
+      const event = this.events.find(
+        (el) => el.start.getTime() === new Date(item.date).getTime()
+      );
+      if (event) {
+        event.viewings.push(item);
+        event.title = event.viewings.length + ' VIEWINGS';
+      } else {
+        this.events.push({
+          start: new Date(item.date),
+          end: new Date(item.date),
+          title: '1 VIEWING',
+          index: this.events.length,
+          viewings: [item],
+        });
+      }
+    });
   }
 
-  eventClicked({ event }:any): void {
+  public eventClicked({ event }: any): void {
     this.dialog.open(ModalEventComponent, {
-      data: { event: event.data, appointmens: this.appointments },
+      data: { event: event, events: this.events },
       width: '600px',
     });
   }
 
-  eventTimesChanged({
+  public eventTimesChanged({
     event,
     newStart,
     newEnd,

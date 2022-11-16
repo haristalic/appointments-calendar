@@ -20,8 +20,6 @@ import { AppointmentEffect } from './components/calendar/state/appointments.effe
 import { appointmentReducer } from './components/calendar/state/appointments.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +46,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],

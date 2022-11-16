@@ -8,14 +8,17 @@ import * as moment from 'moment';
   styleUrls: ['./small-month-calendar.component.scss'],
 })
 export class SmallMonthCalendarComponent implements OnInit {
-  selected: Date;
+  public selectedDate: Date;
 
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
-    this.data.currentDate.subscribe((date) => (this.selected = new Date(date)));
+    this.data.currentDate.subscribe(
+      (date) => (this.selectedDate = new Date(date))
+    );
   }
-  dateChange(): void {
-    this.data.changeMessage(moment(this.selected).format('YYYY-MM-DD'));
+
+  public dateChange(): void {
+    this.data.changeDate(moment(this.selectedDate).format('YYYY-MM-DD'));
   }
 }

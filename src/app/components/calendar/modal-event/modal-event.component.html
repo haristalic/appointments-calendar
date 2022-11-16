@@ -5,15 +5,15 @@
     >
   </div>
   <div class="container col-2">
-    <div class="btn-group ">
-      <div *ngIf="index != 0" (click)="onPrevious()" class="btn  btn-primary">
+    <div class="btn-group">
+      <div *ngIf="index != 0" (click)="onPrevious()" class="btn btn-primary">
         <
       </div>
       <div
         *ngIf="index + 1 != appointments.length"
         (click)="onNext()"
-        class="btn  btn-primary"
-        style="margin-left: 0.5em;"
+        class="btn btn-primary"
+        style="margin-left: 0.5em"
       >
         >
       </div>
@@ -21,8 +21,8 @@
   </div>
 </div>
 
-<div class="container mt-3" *ngIf="modalData">
-  <mat-card>
+<div class="container mt-3" *ngIf="viewings">
+  <mat-card class="mt-2" *ngFor="let view of viewings">
     <div class="row">
       <div class="col">
         <div class="row">
@@ -34,13 +34,13 @@
           </div>
           <div class="col-8">
             <p>
-              <b>{{ modalData.property.name }}</b>
+              <b>{{ view.property.name }}</b>
             </p>
             <p class="text-muted">
-              {{ modalData.property.address.street }}
-              {{ modalData.property.address.houseNumber }},
-              {{ modalData.property.address.zipCode }}
-              {{ modalData.property.address.city }}
+              {{ view.property.address.street }}
+              {{ view.property.address.houseNumber }},
+              {{ view.property.address.zipCode }}
+              {{ view.property.address.city }}
             </p>
           </div>
         </div>
@@ -56,13 +56,21 @@
           <div class="col-8">
             <p>
               <b
-                >{{ modalData.property.user.profile.firstname }}
-                {{ modalData.property.user.profile.name }}</b
+                >{{ view.property.user.profile.firstname }}
+                {{ view.property.user.profile.name }}</b
               >
             </p>
-            <p class="text-muted">{{ modalData.property.user.usertype }}</p>
+            <p class="text-muted">{{ view.property.user.usertype }}</p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col">
+        <p>
+          <mat-icon>person_outline</mat-icon>
+          {{ view.attendeeCount }} | {{ view.maxInviteeCount }}
+        </p>
       </div>
     </div>
   </mat-card>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { INode } from 'src/app/shared/models/INode';
+import { INode } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-preview',
@@ -7,19 +7,20 @@ import { INode } from 'src/app/shared/models/INode';
   styleUrls: ['./preview.component.scss'],
 })
 export class PreviewComponent implements OnInit {
-  @Input() appointments: INode[];
+  @Input() public appointments: INode[];
 
-  nextViewing: INode;
-  nextAppointments: INode[] = [];
-  today = new Date();
+  public nextViewing: INode;
+  private nextAppointments: INode[] = [];
+  private today = new Date();
 
   ngOnInit(): void {
     this.findNextViewing();
   }
 
-  findNextViewing(): void {
+  public findNextViewing(): void {
     for (let item in this.appointments) {
       if (
+        // find view closest to current date and time
         this.today.valueOf() <= new Date(this.appointments[item].date).valueOf()
       ) {
         this.nextAppointments.push(this.appointments[item]);

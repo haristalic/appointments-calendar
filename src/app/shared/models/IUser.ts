@@ -1,4 +1,4 @@
-import { IProfile } from './IProfile';
+import { IProfile } from '../models';
 
 export interface IUser {
   profile: IProfile;
