@@ -34,15 +34,17 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   private sortAppointments(appointments: INode[]): INode[] {
-    // return only uniques appointments
-    return (this.appointments = appointments.filter(
-      (value, index, appointments) =>
-        index ===
-        appointments.findIndex(
-          (appointment) =>
-            appointment.date === value.date &&
-            appointment.property.id === value.property.id
-        )
-    ));
+    // return only uniques appointments sort by time
+    return (this.appointments = appointments
+      .filter(
+        (value, index, appointments) =>
+          index ===
+          appointments.findIndex(
+            (appointment) =>
+              appointment.date === value.date &&
+              appointment.property.id === value.property.id
+          )
+      )
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
   }
 }

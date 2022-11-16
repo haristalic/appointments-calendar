@@ -20,12 +20,13 @@ export class PreviewComponent implements OnInit {
   public findNextViewing(): void {
     for (let item in this.appointments) {
       if (
-        // find view closest to current date and time
+        // check if appointment is expired
         this.today.valueOf() <= new Date(this.appointments[item].date).valueOf()
       ) {
         this.nextAppointments.push(this.appointments[item]);
       }
     }
+    // find view closest to current date and time
     this.nextViewing = this.nextAppointments.reduce((a, b) =>
       new Date(a.date).valueOf() - this.today.valueOf() <
       new Date(b.date).valueOf() - this.today.valueOf()
